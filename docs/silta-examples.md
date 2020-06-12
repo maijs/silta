@@ -3,7 +3,7 @@
 The default values are documented here: https://github.com/wunderio/charts/blob/master/drupal/values.yaml
 
 Below is a list of examples for common needs.
-All examples are meant to be used in the `silta.yml` file of your project. Most of examples work with both drupal chart and frontend chart, unless name is explicitly mentioned above the code snippet. Double-check with default value files for each chart - [drupal](https://github.com/wunderio/charts/blob/master/drupal/values.yaml) and [frontend](https://github.com/wunderio/charts/blob/master/frontend/values.yaml).
+All examples are meant to be used in the `silta.yml` file of your project. Most of the examples work with both drupal chart and frontend chart, unless name is explicitly mentioned above the code snippet. Double-check with default value files for each chart - [drupal](https://github.com/wunderio/charts/blob/master/drupal/values.yaml) and [frontend](https://github.com/wunderio/charts/blob/master/frontend/values.yaml).
 
 Also note that increasing resources will result in increased costs, so use sensible values.
 
@@ -72,7 +72,7 @@ services:
         command: 'my-custom-command'
 ```
 
-## Add aditional environment variables
+## Add additional environment variables
 
 *Drupal chart*:
 ```yaml
@@ -89,7 +89,7 @@ services:
       MY_VARIABLE_NAME: 'theValueOfMyVariable'
 ```
 
-## Changing basic auth username and password
+## Change basic auth username and password
 
 *Drupal chart and Frontend chart*:
 ```yaml
@@ -148,7 +148,7 @@ mailhog:
   enabled: true
 ```
 
-For emails to be actually sent out of the cluster, You can use any external smtp server. Here's an example for sparkpost.
+For emails to be actually sent out of the cluster, you can use any external smtp server. Here's an example for sparkpost.
 
 *Drupal chart*:
 ```yaml
@@ -164,45 +164,45 @@ Note: To get the sparkpost API key, you have to [validate your domain](https://w
 
 If the `smtp` is configured and enabled, but it does not appear to send anything, make sure `mailhog` is not enabled.
 
-## Exposed domains and SSL certificates
-Various `exposeDomains` examples for SSL certificate issuers. Same structure can be reused for release `ssl` parameter too. 
-Note: You can also use `letsencrypt-staging` issuer to avoid hitting `letsencrypt` [rate limits](https://letsencrypt.org/docs/rate-limits/).
+## Expose domains and SSL certificates
+Various `exposeDomains` examples for SSL certificate issuers. Same structure can be reused for release `ssl` parameter too.\
+Note: You can also use `letsencrypt-staging` issuer to avoid hitting `letsencrypt` [rate limits](https://letsencrypt.org/docs/rate-limits/).\
 Note 2: For custom certificates it's advised to add CA root certificate to `exposeDomains[].ssl.crt` value. Having it under `exposeDomains[].ssl.ca` is not enough.
 
 *Drupal chart and Frontend chart*:
 ```yaml
 exposeDomains:
-
-- name: example-nossl
-  hostname: nossl.example.com
-
-- name: example-letsencrypt
-  hostname: ssl-le.example.com
-  ssl:
-    enabled: true
-    issuer: letsencrypt
-
-- name: example-custom
-  hostname: ssl-custom.example.com
-  ssl:
-    enabled: true
-    issuer: custom
-    # Encrypt key and certificate. See: docs/encrypting_sensitive_configuration.md
-    key: |
-      -----BEGIN PRIVATE KEY-----
-      MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC1AnQnJXBJWw3A
-      (..)
-      N/a90beSt0vJ6Cy+jMCVQ0s=
-      -----END PRIVATE KEY-----
-    crt: |
-      -----BEGIN CERTIFICATE-----
-      MIIDPzCCAiegAwIBAgIUe0NEJnh4ffNBsdKzT5/PTlFRoQYwDQYJKoZIhvcNAQEL
-      (..)
-      jyj9OmdjZTJAwwqDdcs6TaRXxQ==
-      -----END CERTIFICATE-----
+    
+    - name: example-nossl
+      hostname: nossl.example.com
+    
+    - name: example-letsencrypt
+      hostname: ssl-le.example.com
+      ssl:
+        enabled: true
+        issuer: letsencrypt
+    
+    - name: example-custom
+      hostname: ssl-custom.example.com
+      ssl:
+        enabled: true
+        issuer: custom
+        # Encrypt key and certificate. See: docs/encrypting_sensitive_configuration.md
+        key: |
+          -----BEGIN PRIVATE KEY-----
+          MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC1AnQnJXBJWw3A
+          (..)
+          N/a90beSt0vJ6Cy+jMCVQ0s=
+          -----END PRIVATE KEY-----
+        crt: |
+          -----BEGIN CERTIFICATE-----
+          MIIDPzCCAiegAwIBAgIUe0NEJnh4ffNBsdKzT5/PTlFRoQYwDQYJKoZIhvcNAQEL
+          (..)
+          jyj9OmdjZTJAwwqDdcs6TaRXxQ==
+          -----END CERTIFICATE-----
 ```
 
-## Adding redirects
+## Add redirects
 Redirects can be relative to current domain or contain full domain for more targeted redirects when multiple external domains (`exposeDomains`) are attached to deployment, and you only need this redirect for a specific URL. Redirect URL's can have regular expressions.
 
 *Drupal chart and Frontend chart*:
